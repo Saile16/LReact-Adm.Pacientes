@@ -42,7 +42,10 @@ const Formulario = ({ pacientes, setPacientes }) => {
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
       >
-        {error && <Error mensaje={"Todos los campos son obligatorios"} />}
+        {/* de esta manera normalmente se usa los props  */}
+        {/* {error && <Error mensaje={"Todos los campos son obligatorios"} />} */}
+        {/* pero tambien podriamos hacerlo de esta manera */}
+        {error && <Error>"Todos los campos son obligatorios"</Error>}
         <div className="mb-5">
           <label
             htmlFor="mascota"
