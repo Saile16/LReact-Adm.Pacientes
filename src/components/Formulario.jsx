@@ -1,14 +1,36 @@
 import { useState, useEffect } from "react";
 
-const Formulario = () => {
+const Formulario = ({ pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
   const [fecha, setFecha] = useState("");
   const [sintomas, setSintomas] = useState("");
+  //para formulario de pacientes
+  const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if ([nombre, propietario, email, fecha, sintomas].includes("")) {
+      setError(true);
+      return;
+    }
+    setError(false);
+    //construimon el objeto paciente
+    const objetoPaciente = {
+      nombre,
+      propietario,
+      email,
+      fecha,
+      sintomas,
+    };
+    setPacientes([...pacientes, objetoPaciente]);
+    //limpiamos el formulario reinciar
+    setNombre("");
+    setPropietario("");
+    setEmail("");
+    setFecha("");
+    setSintomas("");
   };
   return (
     <div className="md:w-1/2 lg:w-2/5 mx-5">
@@ -21,6 +43,11 @@ const Formulario = () => {
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
       >
+        {error && (
+          <div className="bg-red-800 text-white text-center p-3 uppercase font-bold mb-3 rounded">
+            <p>Todos los campos son obligatorios</p>
+          </div>
+        )}
         <div className="mb-5">
           <label
             htmlFor="mascota"
