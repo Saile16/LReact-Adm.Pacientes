@@ -6,6 +6,15 @@ import { useState } from "react";
 function App() {
   const [pacientes, setPacientes] = useState([]);
   const [paciente, setPaciente] = useState({});
+  console.log(pacientes, paciente);
+
+  const eliminarPaciente = (id) => {
+    const pacientesActualizados = pacientes.filter(
+      (paciente) => paciente.id !== id
+    );
+    setPacientes(pacientesActualizados);
+  };
+
   console.log(pacientes);
   return (
     <div className="container mx-auto mt-20">
@@ -17,7 +26,11 @@ function App() {
           paciente={paciente}
           setPaciente={setPaciente}
         />
-        <ListadoPacientes pacientes={pacientes} setPaciente={setPaciente} />
+        <ListadoPacientes
+          pacientes={pacientes}
+          setPaciente={setPaciente}
+          eliminarPaciente={eliminarPaciente}
+        />
       </div>
     </div>
   );
